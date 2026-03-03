@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GiraSol - Mais Gestão | Relatos de Cooperativas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Inter', sans-serif;
+            }
+            h1, h2, h3, h4 {
+                font-family: 'Crimson Pro', serif;
+            }
+        }
+        @layer components {
+            .gradient-text {
+                background: linear-gradient(135deg, #f59e0b 0%, #ea580c 50%, #dc2626 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .card-hover {
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .card-hover:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            }
+            .sun-pattern {
+                background-image: radial-gradient(circle at 50% 50%, rgba(251, 191, 36, 0.1) 0%, transparent 50%);
+            }
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-stone-200/50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-amber-400 to-orange-600 rounded-full flex items-center justify-center shadow-lg">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold gradient-text">GiraSol</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="text-stone-600 hover:text-orange-600 transition-colors font-medium">Início</a>
+                    <a href="#cooperativas" class="text-stone-600 hover:text-orange-600 transition-colors font-medium">Cooperativas</a>
+                    <a href="#impacto" class="text-stone-600 hover:text-orange-600 transition-colors font-medium">Impacto</a>
+                    <a href="#contato" class="text-stone-600 hover:text-orange-600 transition-colors font-medium">Contato</a>
+                </div>
+                <button class="md:hidden text-stone-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <div class="absolute inset-0 sun-pattern"></div>
+        <div class="absolute top-0 left-0 w-full h-full">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-amber-300/20 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-orange-400/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-amber-200/10 to-orange-300/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm mb-8 border border-stone-200">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                <span class="text-sm font-medium text-stone-600">Projeto Mais Gestão/MDA</span>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                <span class="block text-stone-800">Fortalecendo a</span>
+                <span class="block gradient-text">Agricultura Familiar</span>
+                <span class="block text-stone-800">no Rio Grande do Norte</span>
+            </h1>
+
+            <p class="text-xl md:text-2xl text-stone-600 max-w-3xl mx-auto mb-12 leading-relaxed">
+                Conheça as histórias de transformação de três cooperativas que, com o apoio do projeto GiraSol, 
+                fortaleceram sua gestão, ampliaram suas conquistas e construíram um corpo social solidário.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#cooperativas" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                    Conhecer Histórias
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                    </svg>
+                </a>
+                <a href="#impacto" class="inline-flex items-center justify-center px-8 py-4 bg-white text-stone-700 font-semibold rounded-full shadow-md hover:shadow-lg border border-stone-200 transform hover:scale-105 transition-all duration-300">
+                    Ver Impacto
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Cooperatives Section -->
+    <section id="cooperativas" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-orange-600 font-semibold tracking-wider uppercase text-sm">Relatos de Transformação</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-stone-800 mt-4 mb-6">Três Histórias de Sucesso</h2>
+                <p class="text-lg text-stone-600 max-w-2xl mx-auto">
+                    Organizações da agricultura familiar que, através do projeto GiraSol, 
+                    fortaleceram sua auto-organização, gestão e inserção nos mercados institucionais e solidários.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Card 1: Grupo de Mulheres Decididas a Vencer -->
+                <article class="card-hover bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl p-8 border border-amber-100 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-amber-200/30 rounded-full blur-2xl transform translate-x-16 -translate-y-16"></div>
+
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-stone-800 mb-2">Grupo de Mulheres Decididas a Vencer</h3>
+                        <p class="text-orange-600 font-medium mb-4">Associação Xique-Xique • Mossoró/RN</p>
+
+                        <div class="space-y-4 text-stone-600 leading-relaxed">
+                            <p class="text-sm italic text-stone-500 border-l-4 border-amber-400 pl-4 mb-4">
+                                "A participação do Grupo de Mulheres Decididas a Vencer da Associação Xique Xique no Projeto GiraSol/IFRN foi muito importante para o fortalecimento da nossa caminhada coletiva. Ao longo desse processo, vivenciamos oficinas, assessorias técnicas, formações em gestão, intercâmbios e encontros de mulheres que contribuíram diretamente para ampliar nossos conhecimentos, fortalecer nossa organização e renovar nossa confiança na força da auto-organização das mulheres."
+                            </p>
+
+                            <p>
+                                Os frutos desse trabalho aparecem de forma concreta no nosso dia a dia, melhoramos nossa gestão, fortalecemos nossos processos de comercialização, ampliamos nossa participação em feiras e acessamos políticas públicas e programas importantes, como o PAA, a CONAB, as Cozinhas Solidárias e o PAA Compra Direta, além de parcerias com a EMATER, escolas e creches.
+                            </p>
+
+                            <div class="bg-white/60 rounded-xl p-4 border border-amber-200/50">
+                                <h4 class="font-semibold text-stone-800 mb-2 flex items-center">
+                                    <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+                                    </svg>
+                                    Políticas Públicas Acessadas
+                                </h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">PAA</span>
+                                    <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">CONAB</span>
+                                    <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">Cozinhas Solidárias</span>
+                                    <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">EMATER</span>
+                                </div>
+                            </div>
+
+                            <div class="bg-white/60 rounded-xl p-4 border border-amber-200/50">
+                                <h4 class="font-semibold text-stone-800 mb-2 flex items-center">
+                                    <svg class="w-4 h-4 mr-2 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/>
+                                    </svg>
+                                    Circuitos de Comercialização
+                                </h4>
+                                <ul class="space-y-1 text-sm">
+                                    <li>• Feiras semanais</li>
+                                    <li>• Bodega Xique-Xique</li>
+                                    <li>• Feira do IFRN</li>
+                                    <li>• Feira do Bode</li>
+                                    <li>• Eventos regionais e nacionais</li>
+                                </ul>
+                            </div>
+
+                            <p class="text-sm italic text-stone-500 border-l-4 border-amber-400 pl-4">
+                                "Mais do que resultados organizativos e econômicos, esse processo nos ajudou a perceber, com ainda mais clareza, que quando as mulheres se unem, se apoiam e constroem juntas, elas transformam sua realidade com dignidade, coragem e esperança." (Representante do Grupo de Mulheres Decididas a Vencer)
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 2: COOPERMUPS -->
+                <article class="card-hover bg-gradient-to-br from-rose-50 to-pink-50 rounded-3xl p-8 border border-rose-100 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-rose-200/30 rounded-full blur-2xl transform translate-x-16 -translate-y-16"></div>
+
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-gradient-to-br from-rose-400 to-pink-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                            </svg>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-stone-800 mb-2">COOPERMUPS</h3>
+                        <p class="text-rose-600 font-medium mb-4">Cooperativa de Mulheres Prestadoras de Serviços</p>
+
+                        <div class="space-y-4 text-stone-600 leading-relaxed">
+                            <p class="text-sm italic text-stone-500 border-l-4 border-rose-400 pl-4 mb-4">
+                                "A participação da COOPERMUPS nas atividades do Programa Mais Gestão - Projeto GiraSol/IFRN foi fundamental para o fortalecimento da cooperativa. Por meio de oficinas, assessorias técnicas, formações em gestão, intercâmbios e acompanhamento contínuo, as cooperadas ampliaram sua formação e a organização avançou no aprimoramento da gestão, com maior planejamento e fortalecimento institucional."
+                            </p>
+
+                            <div class="bg-white/60 rounded-xl p-4 border border-rose-200/50">
+                                <h4 class="font-semibold text-stone-800 mb-2 flex items-center">
+                                    <svg class="w-4 h-4 mr-2 text-rose-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Resultados Alcançados
+                                </h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-start">
+                                        <span class="text-rose-500 mr-2">•</span>
+                                        Ampliação da formação das cooperadas
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-rose-500 mr-2">•</span>
+                                        Aprimoramento da gestão
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-rose-500 mr-2">•</span>
+                                        Maior planejamento organizacional
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-rose-500 mr-2">•</span>
+                                        Fortalecimento institucional
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-white/60 rounded-xl p-4 border border-rose-200/50">
+                                <h4 class="font-semibold text-stone-800 mb-2 flex items-center">
+                                    <svg class="w-4 h-4 mr-2 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/>
+                                    </svg>
+                                    Comercialização Solidária
+                                </h4>
+                                <div class="bg-rose-50 rounded-lg p-3">
+                                    <p class="text-sm text-stone-600">
+                                        A participação em circuitos curtos de comercialização solidária, especialmente na feira do IFRN Campus Mossoró, contribuiu para ampliar sua inserção econômica e sua visibilidade no território.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <p class="text-sm italic text-stone-500 border-l-4 border-rose-400 pl-4">
+                                (Representante da COOPERMUPS)
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 3: COOPERXIQUE -->
+                <article class="card-hover bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl p-8 border border-emerald-100 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-200/30 rounded-full blur-2xl transform translate-x-16 -translate-y-16"></div>
+
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
