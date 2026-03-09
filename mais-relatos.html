@@ -1,0 +1,3633 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto GiraSol - Mais Gestão/MDA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --blue: #1639ee;
+            --red: #f50000;
+            --yellow: #ffd000;
+            --green: #15c108;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: #fff;
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .top-bar {
+            background: var(--blue);
+            color: white;
+            padding: 8px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-icon svg {
+            width: 24px;
+            height: 24px;
+            color: var(--blue);
+        }
+        
+        .logo-text {
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--blue);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--blue);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 20px 60px;
+            position: relative;
+            background: linear-gradient(135deg, var(--blue) 0%, var(--green) 50%, var(--yellow) 100%);
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 80px;
+            left: 40px;
+            width: 120px;
+            height: 120px;
+            border: 4px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 80px;
+            right: 40px;
+            width: 180px;
+            height: 180px;
+            border: 4px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+        
+        .hero-content {
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 56px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(18px, 3vw, 28px);
+            font-weight: 500;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+        
+        .hero-logo {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .hero-logo svg {
+            width: 60px;
+            height: 60px;
+            color: var(--yellow);
+        }
+        
+        .hero-description {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 12px;
+        }
+        
+        .stat-card svg {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 8px;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            opacity: 0.8;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-indicator div {
+            width: 24px;
+            height: 40px;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            padding-top: 8px;
+        }
+        
+        .scroll-indicator div::after {
+            content: '';
+            width: 6px;
+            height: 10px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 3px;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+        
+        .section-subtitle {
+            font-size: 18px;
+            color: #6b7280;
+        }
+        
+        /* Mulheres Decididas */
+        .bg-blue-light { background: #eff6ff; }
+        .bg-white { background: white; }
+        .bg-yellow-light { background: #fefce8; }
+        
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .quote-card {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--blue);
+            margin-bottom: 24px;
+        }
+        
+        .quote-card svg {
+            width: 40px;
+            height: 40px;
+            color: var(--blue);
+            margin-bottom: 16px;
+        }
+        
+        .quote-card p {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #374151;
+        }
+        
+        .info-card {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 24px;
+        }
+        
+        .info-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #111827;
+        }
+        
+        .info-card h3 svg {
+            width: 24px;
+            height: 24px;
+            color: var(--blue);
+        }
+        
+        .policies-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .policy-item {
+            background: #eff6ff;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid #dbeafe;
+        }
+        
+        .policy-item strong {
+            color: var(--blue);
+            font-size: 15px;
+        }
+        
+        .policy-item p {
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+        
+        .circuit-list {
+            list-style: none;
+        }
+        
+        .circuit-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            color: #374151;
+        }
+        
+        .circuit-list li svg {
+            width: 20px;
+            height: 20px;
+            color: var(--yellow);
+            flex-shrink: 0;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .tag-green {
+            background: #dcfce7;
+            color: var(--green);
+        }
+        
+        .tag-blue {
+            background: #dbeafe;
+            color: var(--blue);
+        }
+        
+        .highlight-quote {
+            background: var(--blue);
+            color: white;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .highlight-quote svg {
+            width: 40px;
+            height: 40px;
+            color: var(--yellow);
+            margin-bottom: 16px;
+        }
+        
+        .highlight-quote p {
+            font-size: 18px;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .highlight-quote .author {
+            color: var(--yellow);
+            margin-top: 16px;
+            font-weight: 500;
+        }
+        
+        /* COOPERMUPS */
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        
+        .result-item {
+            background: #fef2f2;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .result-item svg {
+            width: 32px;
+            height: 32px;
+            color: var(--red);
+            margin-bottom: 12px;
+        }
+        
+        .result-item strong {
+            display: block;
+            font-size: 14px;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+        
+        .result-item span {
+            font-size: 12px;
+            color: #6b7280;
+        }
+        
+        .highlight-box {
+            background: var(--yellow);
+            padding: 32px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .highlight-box h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            color: #111827;
+            margin-bottom: 16px;
+        }
+        
+        .highlight-box p {
+            color: #374151;
+            line-height: 1.6;
+        }
+        
+        .visual-box {
+            background: #f9fafb;
+            padding: 32px;
+            border-radius: 16px;
+            text-align: center;
+        }
+        
+        .visual-icon {
+            width: 80px;
+            height: 80px;
+            background: #fef2f2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .visual-icon svg {
+            width: 40px;
+            height: 40px;
+            color: var(--red);
+        }
+        
+        .red-quote {
+            background: var(--red);
+            color: white;
+        }
+        
+        .red-quote svg {
+            color: white;
+        }
+        
+        .red-quote .author {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        /* COOPERXIQUE */
+        .green-quote {
+            background: var(--green);
+            color: white;
+        }
+        
+        .green-quote svg {
+            color: white;
+        }
+        
+        .green-quote .author {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .pnae-box {
+            background: var(--green);
+            color: white;
+            padding: 32px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .pnae-box h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+        
+        .pnae-highlight {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 12px;
+        }
+        
+        .pnae-highlight strong {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .visibility-list li div {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 208, 0, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .visibility-list li div svg {
+            width: 16px;
+            height: 16px;
+            color: var(--yellow);
+        }
+        
+        /* Impacto */
+        .transform-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+        
+        .transform-card {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #f3f4f6;
+            transition: box-shadow 0.3s;
+        }
+        
+        .transform-card:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+        
+        .transform-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        
+        .transform-icon svg {
+            width: 28px;
+            height: 28px;
+            color: white;
+        }
+        
+        .bg-blue { background: var(--blue); }
+        .bg-green { background: var(--green); }
+        .bg-yellow { background: var(--yellow); }
+        .bg-red { background: var(--red); }
+        
+        .transform-card h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+            color: #111827;
+        }
+        
+        .transform-card p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+        
+        .methodology-highlight {
+            background: #eff6ff;
+            padding: 48px;
+            border-radius: 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .methodology-highlight h3 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: #111827;
+        }
+        
+        .methodology-highlight h3 svg {
+            width: 32px;
+            height: 32px;
+            color: var(--green);
+        }
+        
+        .methodology-highlight p {
+            color: #4b5563;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+        }
+        
+        .btn-blue {
+            background: var(--blue);
+            color: white;
+        }
+        
+        .btn svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        
+        .stat-box {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .stat-box strong {
+            font-size: 28px;
+            color: var(--blue);
+        }
+        
+        .stat-box span {
+            display: block;
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+        
+        /* Metodologia */
+        .methodology-section {
+            background: var(--blue);
+            color: white;
+        }
+        
+        .methodology-section .section-badge {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        
+        .methodology-section .section-title {
+            color: white;
+        }
+        
+        .methodology-section .section-subtitle {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .step-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 24px;
+            border-radius: 16px;
+            transition: background 0.3s;
+        }
+        
+        .step-card:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .step-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .step-icon svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+        
+        .step-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .step-card h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+        
+        .step-card p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.5;
+        }
+        
+        .methodology-footer {
+            background: rgba(255,255,255,0.1);
+            padding: 32px;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .methodology-footer svg {
+            width: 48px;
+            height: 48px;
+            color: var(--yellow);
+            margin-bottom: 16px;
+        }
+        
+        .methodology-footer p {
+            font-size: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Contato */
+        .contact-section {
+            background: #eff6ff;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .contact-card {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .contact-card h3 {
+            font-size: 20px;
+            margin-bottom: 24px;
+            color: #111827;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .contact-icon.yellow { background: rgba(255, 208, 0, 0.2); }
+        .contact-icon.blue { background: rgba(22, 57, 238, 0.1); }
+        .contact-icon.red { background: rgba(245, 0, 0, 0.1); }
+        
+        .contact-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .contact-icon.yellow svg { color: var(--yellow); }
+        .contact-icon.blue svg { color: var(--blue); }
+        .contact-icon.red svg { color: var(--red); }
+        
+        .contact-item div strong {
+            display: block;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+        
+        .contact-item div span,
+        .contact-item div a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+        
+        .contact-item div a:hover {
+            color: var(--red);
+        }
+        
+        .project-card {
+            background: var(--blue);
+            color: white;
+            padding: 32px;
+            border-radius: 16px;
+        }
+        
+        .project-card h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+        
+        .project-card p {
+            color: rgba(255,255,255,0.8);
+            line-height: 1.6;
+        }
+        
+        /* Form */
+        .form-card {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .form-card h3 {
+            font-size: 20px;
+            margin-bottom: 24px;
+            color: #111827;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+        
+        .form-group label svg {
+            width: 16px;
+            height: 16px;
+            color: var(--blue);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(22, 57, 238, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: none;
+            min-height: 120px;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--green);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: opacity 0.3s;
+        }
+        
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
+        
+        .btn-submit svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background: #111827;
+            color: white;
+            padding: 60px 20px 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+        
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .footer-brand .logo-icon {
+            width: 48px;
+            height: 48px;
+        }
+        
+        .footer-brand .logo-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+        
+        .footer-brand div h3 {
+            font-size: 20px;
+        }
+        
+        .footer-brand div p {
+            font-size: 13px;
+            color: #9ca3af;
+        }
+        
+        .footer-about {
+            color: #9ca3af;
+            line-height: 1.6;
+        }
+        
+        .footer-links h4,
+        .footer-contact h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--yellow);
+        }
+        
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            color: #9ca3af;
+        }
+        
+        .footer-contact-item svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .footer-contact-item.yellow svg { color: var(--yellow); }
+        .footer-contact-item.blue svg { color: var(--blue); }
+        .footer-contact-item.red svg { color: var(--red); }
+        
+        .footer-contact-item a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-contact-item a:hover {
+            color: var(--red);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .footer-bottom p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+        
+        .footer-bottom .heart {
+            color: var(--red);
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .two-columns,
+            .transform-cards,
+            .steps-grid,
+            .contact-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .methodology-highlight {
+                grid-template-columns: 1fr;
+            }
+            
+            .policies-grid,
+            .results-grid,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .transform-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            section {
+                padding: 60px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="top-bar">
+            ☀ Projeto GiraSol/IFSOL - IFRN
+        </div>
+        <nav class="nav">
+            <a href="#inicio" class="logo">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path stroke-linecap="round" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                </div>
+                <span class="logo-text">Projeto GiraSol/IFSOL - IFRN</span>
+            </a>
+            <div class="nav-links">
+                <a href="#inicio">Início</a>
+                <a href="#cooperativas">Cooperativas</a>
+                <a href="#impacto">Impacto</a>
+                <a href="#metodologia">Metodologia</a>
+                <a href="#contato">Contato</a>
+            </div>
+            <button class="mobile-menu-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <div class="badge">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                Programa Mais Gestão
+            </div>
+            <h1>Ministério do Desenvolvimento<br>Agrário e Agricultura Familiar</h1>
+            <p class="hero-subtitle">Governo Federal do Brasil</p>
+            <div class="hero-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <path stroke-linecap="round" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                </svg>
+            </div>
+            <p class="hero-description">Fortalecimento das cooperativas, associações e empreendimentos solidários da agricultura familiar do estado do Rio Grande do Norte</p>
+            <div class="stats">
+                <div class="stat-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 21h18M5 21V7l8-4 8 4v14M8 21v-9a2 2 0 012-2h4a2 2 0 012 2v9"/>
+                    </svg>
+                    <div class="stat-number">20</div>
+                    <div class="stat-label">Cooperativas e Associações</div>
+                </div>
+                <div class="stat-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                    </svg>
+                    <div class="stat-number">+100</div>
+                    <div class="stat-label">Pessoas Atendidas</div>
+                </div>
+                <div class="stat-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path stroke-linecap="round" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                    <div class="stat-number">RN</div>
+                    <div class="stat-label">Todo o Estado</div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div></div>
+        </div>
+    </section>
+
+    <!-- Mulheres Decididas -->
+    <section class="bg-blue-light" id="cooperativas">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge" style="background: rgba(22,57,238,0.1); color: var(--blue);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                    </svg>
+                    Cooperativa em Destaque
+                </div>
+                <h2 class="section-title">Grupo de Mulheres Decididas a Vencer</h2>
+                <p class="section-subtitle">Associação Xique-Xique • Mossoró/RN</p>
+            </div>
+            <div class="two-columns">
+                <div>
+                    <div class="quote-card">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        </svg>
+                        <p>A participação do Grupo de Mulheres Decididas a Vencer da Associação Xique Xique no Projeto GiraSol/IFRN foi muito importante para o fortalecimento da nossa caminhada coletiva. Ao longo desse processo, vivenciamos oficinas, assessorias técnicas, formações em gestão, intercâmbios e encontros de mulheres que contribuíram diretamente para ampliar nossos conhecimentos, fortalecer nossa organização e renovar nossa confiança na força da auto-organização das mulheres.</p>
+                    </div>
+                    <div class="info-card">
+                        <p>Os frutos desse trabalho aparecem de forma concreta no nosso dia a dia, melhoramos nossa gestão, fortalecemos nossos processos de comercialização, ampliamos nossa participação em feiras e acessamos políticas públicas e programas importantes.</p>
+                        <div class="tags">
+                            <span class="tag tag-green">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                                    <path d="M22 4L12 14.01l-3-3"/>
+                                </svg>
+                                PAA
+                            </span>
+                            <span class="tag tag-green">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                                    <path d="M22 4L12 14.01l-3-3"/>
+                                </svg>
+                                PAA Compra Direta
+                            </span>
+                            <span class="tag tag-blue">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M3 21h18M5 21V7l8-4 8 4v14M8 21v-9a2 2 0 012-2h4a2 2 0 012 2v9"/>
+                                </svg>
+                                Escolas e Creches
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card">
+                        <h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 21h18M5 21V7l8-4 8 4v14M8 21v-9a2 2 0 012-2h4a2 2 0 012 2v9"/>
+                            </svg>
+                            Políticas Públicas Acessadas
+                        </h3>
+                        <div class="policies-grid">
+                            <div class="policy-item">
+                                <strong>PAA</strong>
+                                <p>Programa de Aquisição de Alimentos</p>
+                            </div>
+                            <div class="policy-item">
+                                <strong>CONAB</strong>
+                                <p>Companhia Nacional de Abastecimento</p>
+                            </div>
+                            <div class="policy-item">
+                                <strong>Cozinhas Solidárias</strong>
+                                <p>Programa de alimentação</p>
+                            </div>
+                            <div class="policy-item">
+                                <strong>EMATER</strong>
+                                <p>Assistência técnica rural</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18"/>
+                            </svg>
+                            Circuitos de Comercialização
+                        </h3>
+                        <ul class="circuit-list">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="3" width="15" height="13"/>
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                                    <circle cx="5.5" cy="18.5" r="2.5"/>
+                                    <circle cx="18.5" cy="18.5" r="2.5"/>
+                                </svg>
+                                Feiras semanais
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="3" width="15" height="13"/>
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                                    <circle cx="5.5" cy="18.5" r="2.5"/>
+                                    <circle cx="18.5" cy="18.5" r="2.5"/>
+                                </svg>
+                                Bodega Xique-Xique
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="3" width="15" height="13"/>
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                                    <circle cx="5.5" cy="18.5" r="2.5"/>
+                                    <circle cx="18.5" cy="18.5" r="2.5"/>
+                                </svg>
+                                Feira do IFRN
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="3" width="15" height="13"/>
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                                    <circle cx="5.5" cy="18.5" r="2.5"/>
+                                    <circle cx="18.5" cy="18.5" r="2.5"/>
+                                </svg>
+                                Feira do Bode
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="3" width="15" height="13"/>
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                                    <circle cx="5.5" cy="18.5" r="2.5"/>
+                                    <circle cx="18.5" cy="18.5" r="2.5"/>
+                                </svg>
+                                Eventos regionais e nacionais
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="highlight-quote">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+                <p>"Mais do que resultados organizativos e econômicos, esse processo nos ajudou a perceber, com ainda mais clareza, que quando as mulheres se unem, se apoiam e constroem juntas, elas transformam sua realidade com dignidade, coragem e esperança."</p>
+                <p class="author">— Representante do Grupo de Mulheres Decididas a Vencer</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- COOPERMUPS -->
+    <section class="bg-white">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge" style="background: rgba(245,0,0,0.1); color: var(--red);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                    </svg>
+                    Cooperativa em Destaque
+                </div>
+                <h2 class="section-title">COOPERMUPS</h2>
+                <p class="section-subtitle">Cooperativa de Mulheres Prestadoras de Serviços</p>
+            </div>
+            <div class="two-columns">
+                <div>
+                    <div class="quote-card" style="border-left-color: var(--red); background: #fef2f2;">
+                        <svg viewBox="0 0 24 24" fill="currentColor" style="color: var(--red);">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        </svg>
+                        <p>A participação da COOPERMUPS nas atividades do Programa Mais Gestão - Projeto GiraSol/IFRN foi fundamental para o fortalecimento da cooperativa. Por meio de oficinas, assessorias técnicas, formações em gestão, intercâmbios e acompanhamento contínuo, as cooperadas ampliaram sua formação e a organização avançou no aprimoramento da gestão, com maior planejamento e fortalecimento institucional.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 style="color: #111827;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--red);">
+                                <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                                <path d="M17 6h6v6"/>
+                            </svg>
+                            Resultados Alcançados
+                        </h3>
+                        <div class="results-grid">
+                            <div class="result-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
+                                    <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+                                </svg>
+                                <strong>Ampliação da formação</strong>
+                                <span>Das cooperadas</span>
+                            </div>
+                            <div class="result-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                                    <path d="M17 6h6v6"/>
+                                </svg>
+                                <strong>Aprimoramento da gestão</strong>
+                                <span>Processos organizacionais</span>
+                            </div>
+                            <div class="result-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <circle cx="12" cy="12" r="6"/>
+                                    <circle cx="12" cy="12" r="2"/>
+                                </svg>
+                                <strong>Maior planejamento</strong>
+                                <span>Organizacional estratégico</span>
+                            </div>
+                            <div class="result-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="8" r="7"/>
+                                    <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>
+                                </svg>
+                                <strong>Fortalecimento institucional</strong>
+                                <span>Consolidação da cooperativa</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="highlight-box">
+                        <h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18"/>
+                            </svg>
+                            Comercialização Solidária
+                        </h3>
+                        <p>A participação em circuitos curtos de comercialização solidária, especialmente na feira do IFRN Campus Mossoró, contribuiu para ampliar sua inserção econômica e sua visibilidade no território.</p>
+                    </div>
+                    <div class="visual-box">
+                        <div class="visual-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                            </svg>
+                        </div>
+                        <p>A COOPERMUPS representa a força das mulheres na prestação de serviços e na construção de uma economia solidária em Mossoró.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="highlight-quote red-quote">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+                <p>"A COOPERMUPS segue fortalecida, com mais ferramentas para continuar sua trajetória de empoderamento e transformação social."</p>
+                <p class="author">— Representante da COOPERMUPS</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- COOPERXIQUE -->
+    <section class="bg-yellow-light">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge" style="background: rgba(255,208,0,0.3); color: #111827;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                    </svg>
+                    Cooperativa em Destaque
+                </div>
+                <h2 class="section-title">COOPERXIQUE</h2>
+                <p class="section-subtitle">Cooperativa de Comercialização Solidária Xique Xique</p>
+            </div>
+            <div class="two-columns">
+                <div>
+                    <div class="quote-card" style="border-left-color: var(--yellow);">
+                        <svg viewBox="0 0 24 24" fill="currentColor" style="color: var(--yellow);">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        </svg>
+                        <p>A participação da Cooperativa de Comercialização Solidária Xique Xique - Cooperxique nas atividades do Programa Mais Gestão-Projeto GiraSol/IFRN foi muito importante para o fortalecimento da nossa organização. Ao longo do processo, participamos de oficinas, formações em gestão, intercâmbios e encontros de mulheres, que contribuíram para qualificar nossas práticas de comercialização e nossos processos internos de gestão.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--green);">
+                                <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                                <path d="M17 6h6v6"/>
+                            </svg>
+                            Resultados
+                        </h3>
+                        <div class="results-grid">
+                            <div class="result-item" style="background: #dcfce7;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--green);">
+                                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                                    <line x1="3" y1="6" x2="21" y2="6"/>
+                                    <path d="M16 10a4 4 0 01-8 0"/>
+                                </svg>
+                                <strong>Qualificação das práticas</strong>
+                                <span>De comercialização</span>
+                            </div>
+                            <div class="result-item" style="background: #dcfce7;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--green);">
+                                    <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                                    <path d="M17 6h6v6"/>
+                                </svg>
+                                <strong>Inserção em circuitos</strong>
+                                <span>Curtos de comercialização</span>
+                            </div>
+                            <div class="result-item" style="background: #dcfce7;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--green);">
+                                    <circle cx="12" cy="8" r="7"/>
+                                    <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>
+                                </svg>
+                                <strong>Melhoria dos processos</strong>
+                                <span>Internos de gestão</span>
+                            </div>
+                            <div class="result-item" style="background: #dcfce7;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--green);">
+                                    <circle cx="18" cy="5" r="3"/>
+                                    <circle cx="6" cy="12" r="3"/>
+                                    <circle cx="18" cy="19" r="3"/>
+                                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                                </svg>
+                                <strong>Ampliação da divulgação</strong>
+                                <span>Em redes sociais</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="pnae-box">
+                        <h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="8" r="7"/>
+                                <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>
+                            </svg>
+                            Política Pública Acessada
+                        </h3>
+                        <div class="pnae-highlight">
+                            <strong>PNAE</strong>
+                            <span>Programa Nacional de Alimentação Escolar</span>
+                        </div>
+                        <p style="margin-top: 16px; color: rgba(255,255,255,0.8);">Essas ações contribuíram significativamente para consolidar nossa atuação econômica e organizativa.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--blue);">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                            Visibilidade
+                        </h3>
+                        <ul class="circuit-list visibility-list">
+                            <li>
+                                <div>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="18" cy="5" r="3"/>
+                                        <circle cx="6" cy="12" r="3"/>
+                                        <circle cx="18" cy="19" r="3"/>
+                                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                                    </svg>
+                                </div>
+                                Feira no IFRN campus Mossoró
+                            </li>
+                            <li>
+                                <div>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="18" cy="5" r="3"/>
+                                        <circle cx="6" cy="12" r="3"/>
+                                        <circle cx="18" cy="19" r="3"/>
+                                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                                    </svg>
+                                </div>
+                                Divulgação amplificada nas redes sociais
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="highlight-quote green-quote">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+                <p>"A COOPERXIQUE segue fortalecida, com mais ferramentas para continuar sua trajetória de empoderamento e transformação social."</p>
+                <p class="author">— Representante da COOPERXIQUE</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- UNICAFES -->
+    <section class="bg-blue-light" id="cooperativas">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge" style="background: rgba(22,57,238,0.1); color: var(--blue);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                    </svg>
+                    Cooperativa em Destaque
+                </div>
+                <h2 class="section-title">UNICAFES</h2>
+                <p class="section-subtitle">União das Cooperativas da Agricultura Familiar e Economia Solidária do Rio Grande Do Norte</p>
+            </div>
+            <div class="two-columns">
+                <div>
+                    <div class="quote-card">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        </svg>
+                        <p>O Programa Mais Gestão – Projeto GiraSol foi fundamental para o fortalecimento da nossa organização, a UNICAFES/RN, e das cooperativas vinculadas. Ao longo da execução do projeto, avançamos na organização administrativa, na estruturação documental e financeira e no aprimoramento dos processos internos. Participamos de oficinas, assessorias técnicas, formações em gestão, intercâmbios, encontros de mulheres e contamos com acompanhamento contínuo, o que contribuiu diretamente para qualificar nossa atuação. Recebemos orientações sobre regularidade jurídica, formação de preços, análise de editais e participação em chamadas públicas, o que trouxe mais segurança na tomada de decisões e maior profissionalização da gestão. Também fortalecemos nossa articulação com gestores públicos e parceiros estratégicos, consolidando a UNICAFES/RN como referência na comercialização da agricultura familiar no estado.</p>
+                    </div>
+                    <div class="info-card">
+                        <p>Na UNICAFES/RN, os resultados desse trabalho são visíveis no fortalecimento da gestão interna, na melhoria dos processos de comercialização e na ampliação da participação em feiras. Também avançamos no acesso a políticas públicas estratégicas, como o Programa de Aquisição de Alimentos (PAA), o Programa Nacional de Alimentação Escolar (PNAE) e o Programa Estadual de Compras da Agricultura Familiar e Economia Solidária (PECAFES/RN), consolidando oportunidades e fortalecendo a agricultura familiar no estado.
+</p>
+                        <div class="tags">
+                            <span class="tag tag-green">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                                    <path d="M22 4L12 14.01l-3-3"/>
+                                </svg>
+                                PAA
+                            </span>
+                            <span class="tag tag-green">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                                    <path d="M22 4L12 14.01l-3-3"/>
+                                </svg>
+                                PAA Compra Direta
+                            </span>
+                            <span class="tag tag-blue">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M3 21h18M5 21V7l8-4 8 4v14M8 21v-9a2 2 0 012-2h4a2 2 0 012 2v9"/>
+                                </svg>
+                                Peces/RN
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card">
+                        <h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 21h18M5 21V7l8-4 8 4v14M8 21v-9a2 2 0 012-2h4a2 2 0 012 2v9"/>
+                            </svg>
+                            Políticas Públicas Acessadas
+                        </h3>
+                        <div class="policies-grid">
+                            <div class="policy-item">
+                                <strong>PAA</strong>
+                                <p>Programa de Aquisição de Alimentos</p>
+                            </div>
+                            <div class="policy-item">
+                                <strong>PNAE</strong>
+                                <p>Programa Nacional de Alimentação Escolar</p>
+                            </div>
+                            <div class="policy-item">
+                                <strong>PECES/RN</strong>
+                                <p>Programa Estadual de Compras da Agricultura Familiar e Economia Solidária</p>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18"/>
+                            </svg>
+                            Circuitos de Comercialização
+                        </h3>
+                        <ul class="circuit-list">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="3" width="15" height="13"/>
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                                    <circle cx="5.5" cy="18.5" r="2.5"/>
+                                    <circle cx="18.5" cy="18.5" r="2.5"/>
+                                </svg>
+                                Feira Potiguar da Agricultura Familiar e Economia Solidária
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="3" width="15" height="13"/>
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                                    <circle cx="5.5" cy="18.5" r="2.5"/>
+                                    <circle cx="18.5" cy="18.5" r="2.5"/>
+                                </svg>
+                                Feira Baiana da Agricultura Familiar e Economia Solidária (16ª edição)
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="3" width="15" height="13"/>
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                                    <circle cx="5.5" cy="18.5" r="2.5"/>
+                                    <circle cx="18.5" cy="18.5" r="2.5"/>
+                                </svg>
+                                Feira Maranhense da Agricultura Familiar
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="3" width="15" height="13"/>
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                                    <circle cx="5.5" cy="18.5" r="2.5"/>
+                                    <circle cx="18.5" cy="18.5" r="2.5"/>
+                                </svg>
+                                COP 30
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="3" width="15" height="13"/>
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                                    <circle cx="5.5" cy="18.5" r="2.5"/>
+                                    <circle cx="18.5" cy="18.5" r="2.5"/>
+                                </svg>
+                                Eventos regionais e nacionais
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="highlight-quote">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+                <p>"Mais do que resultados organizativos e econômicos, esse processo nos permitiu compreender que a união, o apoio mútuo e a construção coletiva são capazes de transformar realidades com dignidade e esperança.
+"</p>
+                <p class="author">— Representante da UNICAFES</p>
+            </div>
+        </div>
+    </section>
+
+<!-- COOPPOTENGI -->
+<section class="bg-white">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge" style="background: rgba(245,0,0,0.1); color: var(--red);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                Cooperativa em Destaque
+            </div>
+            <h2 class="section-title">COOPPOTENGI</h2>
+            <p class="section-subtitle">Cooperativa da Agricultura Familiar do Território do Potengi</p>
+        </div>
+
+        <div class="two-columns">
+            <div>
+                <div class="quote-card" style="border-left-color: var(--red); background: #fef2f2;">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="color: var(--red);">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p>O Projeto GiraSol teve papel estratégico no fortalecimento da COOPPOTENGI, promovendo avanços concretos na organização e profissionalização da cooperativa. Destaca-se a elaboração e estruturação do Regimento Interno, a formação em mídias sociais com foco no uso estratégico do Instagram e o acompanhamento técnico contínuo das atividades, incluindo apoio nas chamadas públicas e presença nos dias de habilitação do PNAE, PAA e demais programas institucionais.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3 style="color: #111827;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--red);">
+                            <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                            <path d="M17 6h6v6"/>
+                        </svg>
+                        Resultados Alcançados
+                    </h3>
+
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+                            </svg>
+                            <strong>Elaboração do Regimento Interno</strong>
+                            <span>Fortalecimento da governança e definição de responsabilidades</span>
+                        </div>
+
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                                <path d="M17 6h6v6"/>
+                            </svg>
+                            <strong>Formação em mídias sociais</strong>
+                            <span>Uso estratégico do Instagram para divulgação e posicionamento</span>
+                        </div>
+
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <circle cx="12" cy="12" r="6"/>
+                                <circle cx="12" cy="12" r="2"/>
+                            </svg>
+                            <strong>Qualificação para chamadas públicas</strong>
+                            <span>Análise de editais e acompanhamento na habilitação</span>
+                        </div>
+
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="8" r="7"/>
+                                <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>
+                            </svg>
+                            <strong>Fortalecimento institucional</strong>
+                            <span>Maior organização interna e competitividade territorial</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="highlight-box">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18"/>
+                        </svg>
+                        Comercialização Institucional e Feiras
+                    </h3>
+                    <p>A COOPPOTENGI ampliou sua inserção nos mercados públicos por meio do PNAE, PAA e PECAFES, com organização documental, análise de editais e acompanhamento técnico nos processos de habilitação. Também fortaleceu sua presença em feiras da agricultura familiar, promovendo venda direta e valorização da produção local.</p>
+                </div>
+
+                <div class="visual-box">
+                    <div class="visual-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                        </svg>
+                    </div>
+                    <p>A COOPPOTENGI consolida-se como uma cooperativa mais estruturada, preparada e competitiva, fortalecendo sua atuação no Território do Potengi e ampliando oportunidades para seus cooperados.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-quote red-quote">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <p>"O Projeto GiraSol fortaleceu nossa organização interna e ampliou nossa capacidade de atuação nos mercados institucionais."</p>
+            <p class="author">— Representante da COOPPOTENGI</p>
+        </div>
+    </div>
+</section>
+
+<!-- ORGANIZAÇÃO EM DESTAQUE -->
+<section class="bg-yellow-light">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge" style="background: rgba(255,208,0,0.3); color: #111827;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                Organização em Destaque
+            </div>
+            <h2 class="section-title">Associação de Mulheres de Santa Catarina
+</h2>
+            <p class="section-subtitle"></p>
+        </div>
+
+        <div class="two-columns">
+            <div>
+                <div class="quote-card" style="border-left-color: var(--yellow);">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="color: var(--yellow);">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p>Participamos das oficinas, assessorias técnicas, formações em gestão, acompanhamento contínuo, intercâmbios e encontros de mulheres promovidos pelo Mais Gestão – Projeto GiraSol. Essas ações contribuíram para fortalecer nossa organização e ampliar nossa participação coletiva.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--green);">
+                            <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                            <path d="M17 6h6v6"/>
+                        </svg>
+                        Resultados
+                    </h3>
+
+                    <div class="results-grid">
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Melhor organização</strong>
+                            <span>E maior participação das mulheres</span>
+                        </div>
+
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Troca de experiências</strong>
+                            <span>Com outros grupos e associações</span>
+                        </div>
+
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Orientações técnicas</strong>
+                            <span>Para cultivo de hortaliças agroecológicas</span>
+                        </div>
+
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Fortalecimento organizativo</strong>
+                            <span>Em espaços de participação coletiva</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="info-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--blue);">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                        </svg>
+                        Mercados e Comercialização
+                    </h3>
+
+                    <ul class="circuit-list visibility-list">
+                        <li>Expositor na III Feira Potiguar de Agricultura Familiar e Economia Solidária – Natal/RN</li>
+                        <li>Comercialização por encomendas</li>
+                        <li>Venda direta ao consumidor</li>
+                        <li>Feiras de Economia Solidária no município</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-quote green-quote">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <p>"O Projeto GiraSol contribuiu para uma melhor organização da associação e ampliou a participação das mulheres nas atividades e em outros espaços coletivos."</p>
+            <p class="author">— Representante da Associação</p>
+        </div>
+    </div>
+</section>
+
+<!-- REDE DOS SONHOS -->
+<section class="bg-blue-light" id="cooperativas">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge" style="background: rgba(22,57,238,0.1); color: var(--blue);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                Organização em Destaque
+            </div>
+            <h2 class="section-title">Rede dos Sonhos</h2>
+            <p class="section-subtitle">Associação de mulheres com atuação em agroecologia e economia solidária</p>
+        </div>
+
+        <div class="two-columns">
+            <div>
+                <div class="quote-card">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p>O Mais Gestão – Projeto GiraSol contribuiu significativamente para a melhor organização e maior participação das mulheres na associação e em outros espaços coletivos. As integrantes participaram de oficinas, assessorías técnicas, formações em gestão, intercâmbios, encontros de mulheres e contaram com acompanhamento contínuo. A troca de experiências com outros grupos fortaleceu o aprendizado coletivo, além das orientações técnicas para o cultivo de hortaliças agroecológicas em vasos, considerando que as mulheres dispõem de pequenos espaços para produção.</p>
+                </div>
+
+                <div class="info-card">
+                    <p>O projeto fortaleceu a estrutura organizativa da associação, ampliou a participação feminina nas atividades e promoveu maior autonomia produtiva, especialmente na produção agroecológica em pequenos espaços urbanos e domiciliares.</p>
+
+                    <div class="tags">
+                        <span class="tag tag-green">Oficinas</span>
+                        <span class="tag tag-green">Assessorias Técnicas</span>
+                        <span class="tag tag-green">Formações em Gestão</span>
+                        <span class="tag tag-green">Acompanhamento Contínuo</span>
+                        <span class="tag tag-blue">Intercâmbios</span>
+                        <span class="tag tag-blue">Encontro de Mulheres</span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="info-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="1" y="3" width="15" height="13"/>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                            <circle cx="5.5" cy="18.5" r="2.5"/>
+                            <circle cx="18.5" cy="18.5" r="2.5"/>
+                        </svg>
+                        Acesso a Mercados
+                    </h3>
+                    <ul class="circuit-list">
+                        <li>Participação como expositora na III Feira Potiguar da Agricultura Familiar e Economia Solidária – Natal/RN</li>
+                        <li>Comercialização por meio de encomendas</li>
+                        <li>Vendas diretas ao consumidor</li>
+                        <li>Feiras de Economia Solidária no município</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18"/>
+                        </svg>
+                        Circuitos Curtos de Comercialização
+                    </h3>
+                    <ul class="circuit-list">
+                        <li>III Feira Potiguar da Agricultura Familiar e Economia Solidária – Natal/RN</li>
+                        <li>Encomendas diretas</li>
+                        <li>Venda direta ao consumidor</li>
+                        <li>Feiras locais de Economia Solidária</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-quote">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <p>"O projeto fortaleceu nossa organização, ampliou a participação das mulheres e trouxe conhecimentos técnicos fundamentais para a produção agroecológica em pequenos espaços."</p>
+            <p class="author">— Representante da Rede dos Sonhos</p>
+        </div>
+    </div>
+</section>
+
+<!-- ASSOCIAÇÃO DE IDOSOS JULIETA BARROS -->
+<section class="bg-white">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge" style="background: rgba(245,0,0,0.1); color: var(--red);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                Organização em Destaque
+            </div>
+            <h2 class="section-title">Associação de Idosos Julieta Barros</h2>
+            <p class="section-subtitle">Organização de fortalecimento social e produtivo</p>
+        </div>
+        <div class="two-columns">
+            <div>
+                <div class="quote-card" style="border-left-color: var(--red); background: #fef2f2;">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="color: var(--red);">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p>A Associação de Idosos Julieta Barros participou de oficinas, assessorias técnicas, formações em gestão, acompanhamento contínuo, intercâmbios e encontro de mulheres no âmbito do Programa Mais Gestão – Projeto GiraSol. As ações contribuíram para fortalecer a organização interna e ampliar a participação das associadas.</p>
+                </div>
+                <div class="info-card">
+                    <h3 style="color: #111827;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--red);">
+                            <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                            <path d="M17 6h6v6"/>
+                        </svg>
+                        Resultados Alcançados
+                    </h3>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+                            </svg>
+                            <strong>Melhor organização</strong>
+                            <span>Estrutura interna fortalecida</span>
+                        </div>
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                                <path d="M17 6h6v6"/>
+                            </svg>
+                            <strong>Maior participação das mulheres</strong>
+                            <span>Atuação ativa nas atividades</span>
+                        </div>
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <circle cx="12" cy="12" r="6"/>
+                                <circle cx="12" cy="12" r="2"/>
+                            </svg>
+                            <strong>Troca de experiências</strong>
+                            <span>Aprendizado com outros grupos</span>
+                        </div>
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="8" r="7"/>
+                                <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>
+                            </svg>
+                            <strong>Fortalecimento coletivo</strong>
+                            <span>Participação em espaços sociais</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="highlight-box">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18"/>
+                        </svg>
+                        Comercialização
+                    </h3>
+                    <p>A Associação dispõe de um espaço na sede onde funciona uma loja para comercialização de seus produtos. Realiza vendas por encomenda, vendas diretas ao consumidor e participa de feiras de Economia Solidária no município.</p>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                        </svg>
+                    </div>
+                    <p>A organização acessou a política pública PECES/RN e segue fortalecendo a participação das mulheres em diferentes espaços sociais.</p>
+                </div>
+            </div>
+        </div>
+        <div class="highlight-quote red-quote">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <p>"O Projeto GiraSol contribuiu para uma melhor organização da associação e ampliou a participação das mulheres nas formações, oficinas, intercâmbios e encontros, promovendo aprendizado coletivo."</p>
+            <p class="author">— Representante da Associação de Idosos Julieta Barros</p>
+        </div>
+    </div>
+</section>
+
+<!-- PONTO CULTURAL COCO JUMERADO -->
+<section class="bg-yellow-light">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge" style="background: rgba(255,208,0,0.3); color: #111827;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                Organização em Destaque
+            </div>
+            <h2 class="section-title">Ponto Cultural Coco Jumerado</h2>
+            <p class="section-subtitle">Organização participante do Mais Gestão – Projeto GiraSol</p>
+        </div>
+
+        <div class="two-columns">
+            <div>
+                <div class="quote-card" style="border-left-color: var(--yellow);">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="color: var(--yellow);">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p>Participamos de oficinas, assessorias técnicas, formações em gestão, acompanhamento contínuo, intercâmbios e encontros de mulheres promovidos pelo projeto. Essas atividades possibilitaram a troca de experiências com outros grupos, destacando-se o intercâmbio sobre plantas e suas propriedades medicinais, fortalecendo nossos saberes e práticas culturais.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--green);">
+                            <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                            <path d="M17 6h6v6"/>
+                        </svg>
+                        Resultados
+                    </h3>
+
+                    <div class="results-grid">
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Fortalecimento do grupo</strong>
+                            <span>Maior organização interna</span>
+                        </div>
+
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Ampliação da participação</strong>
+                            <span>Envolvimento coletivo nas atividades</span>
+                        </div>
+
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Valorização dos saberes tradicionais</strong>
+                            <span>Plantas medicinais e cultura popular</span>
+                        </div>
+
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Troca de experiências</strong>
+                            <span>Intercâmbios com outros grupos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-quote green-quote">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <p>"O Projeto GiraSol contribuiu significativamente para fortalecer o grupo, promovendo maior organização interna, valorização dos saberes tradicionais e ampliação da participação coletiva."</p>
+            <p class="author">— Representante do Ponto Cultural Coco Jumerado</p>
+        </div>
+    </div>
+</section>
+
+<!-- ILÊ AXÉ DAJÔ OBÁ ODOGÔ -->
+<section class="bg-white">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge" style="background: rgba(245,0,0,0.1); color: var(--red);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                Organização em Destaque
+            </div>
+            <h2 class="section-title">Ilê Axé Dajô Obá Odogô</h2>
+            <p class="section-subtitle">Espaço tradicional de fortalecimento cultural e comunitário</p>
+        </div>
+        <div class="two-columns">
+            <div>
+                <div class="quote-card" style="border-left-color: var(--red); background: #fef2f2;">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="color: var(--red);">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p>O Ilê Axé Dajô Obá Odogô participou de oficinas, assessorias técnicas, formações em gestão, acompanhamento contínuo, intercâmbios e encontro de mulheres no âmbito do Programa Mais Gestão – Projeto GiraSol. As atividades fortaleceram o aprendizado coletivo e a organização interna do grupo.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3 style="color: #111827;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--red);">
+                            <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                            <path d="M17 6h6v6"/>
+                        </svg>
+                        Resultados Alcançados
+                    </h3>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+                            </svg>
+                            <strong>Troca de experiências</strong>
+                            <span>Aprendizado com outros grupos</span>
+                        </div>
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <circle cx="12" cy="12" r="6"/>
+                                <circle cx="12" cy="12" r="2"/>
+                            </svg>
+                            <strong>Intercâmbio sobre plantas</strong>
+                            <span>Propriedades medicinais e saberes tradicionais</span>
+                        </div>
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                                <path d="M17 6h6v6"/>
+                            </svg>
+                            <strong>Melhor organização</strong>
+                            <span>Gestão e estrutura interna</span>
+                        </div>
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="8" r="7"/>
+                                <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>
+                            </svg>
+                            <strong>Fortalecimento das mulheres</strong>
+                            <span>Ampliação da participação feminina</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="highlight-box">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18"/>
+                        </svg>
+                        Organização do Pomar e Ervas
+                    </h3>
+                    <p>O Projeto GiraSol contribuiu para uma melhor organização do pomar de frutas, ervas medicinais e plantas ritualísticas mantidas na sede. Por meio de visitas e orientações técnicas, houve melhorias nos cultivos existentes e maior sistematização do cuidado com as plantas.</p>
+                </div>
+
+                <div class="visual-box">
+                    <div class="visual-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                        </svg>
+                    </div>
+                    <p>As ações do projeto reforçaram a importância da participação das mulheres nos processos organizativos e produtivos do Ilê.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-quote red-quote">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <p>"A participação no Projeto GiraSol promoveu troca de saberes, especialmente sobre plantas medicinais, fortaleceu a organização interna e ampliou o protagonismo das mulheres no Ilê Axé Dajô Obá Odogô."</p>
+            <p class="author">— Representante do Ilê Axé Dajô Obá Odogô</p>
+        </div>
+    </div>
+</section>
+
+<!-- ASSOCIAÇÃO DE PRODUTORES E PRODUTORAS DA FEIRA AGROECOLÓGICA DE MOSSORÓ -->
+<section class="bg-yellow-light">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge" style="background: rgba(255,208,0,0.3); color: #111827;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                Organização em Destaque
+            </div>
+            <h2 class="section-title">Associação de Produtores e Produtoras da Feira Agroecológica de Mossoró</h2>
+            <p class="section-subtitle">Organização participante do Mais Gestão – Projeto GiraSol</p>
+        </div>
+
+        <div class="two-columns">
+            <div>
+                <div class="quote-card" style="border-left-color: var(--yellow);">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="color: var(--yellow);">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p>A associação participou de oficinas, assessorias técnicas, formações em gestão, acompanhamento contínuo, intercâmbios e encontros de mulheres. O Projeto GiraSol contribuiu para a auto-organização do grupo, fortalecimento das feiras agroecológicas, ampliação do acesso a mercados públicos e privados, articulação institucional para aquisição de espaço sede e regularização documental, como o CAF.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--green);">
+                            <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                            <path d="M17 6h6v6"/>
+                        </svg>
+                        Resultados
+                    </h3>
+
+                    <div class="results-grid">
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Auto-organização</strong>
+                            <span>Fortalecimento institucional</span>
+                        </div>
+
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Acesso a mercados</strong>
+                            <span>Públicos e privados</span>
+                        </div>
+
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Regularização documental</strong>
+                            <span>CAF e documentações atualizadas</span>
+                        </div>
+
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Fortalecimento das feiras</strong>
+                            <span>Quatro feiras em funcionamento</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="pnae-box">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="8" r="7"/>
+                            <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>
+                        </svg>
+                        Políticas Públicas Acessadas
+                    </h3>
+                    <div class="pnae-highlight">
+                        <strong>PAA</strong>
+                        <span>Programa de Aquisição de Alimentos</span>
+                    </div>
+                    <div class="pnae-highlight" style="margin-top:10px;">
+                        <strong>PNAE</strong>
+                        <span>Programa Nacional de Alimentação Escolar</span>
+                    </div>
+                    <div class="pnae-highlight" style="margin-top:10px;">
+                        <strong>Compra Direta / EMATER</strong>
+                        <span>Parcerias institucionais</span>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--blue);">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                        </svg>
+                        Comercialização
+                    </h3>
+
+                    <ul class="circuit-list visibility-list">
+                        <li>Participação em mercados municipais e estaduais</li>
+                        <li>Execução do PAA e PNAE</li>
+                        <li>Relações comerciais privadas por meio da unidade de polpas</li>
+                        <li>Atuação em quatro feiras agroecológicas em pleno funcionamento</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-quote green-quote">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <p>"O Mais Gestão – Projeto GiraSol foi fundamental no assessoramento da associação, auxiliando nas conquistas institucionais, no enfrentamento dos desafios organizativos e no fortalecimento da nossa atuação econômica e social."</p>
+            <p class="author">— Representante da Associação</p>
+        </div>
+    </div>
+</section>
+
+<!-- COOPERATIVA DE PRODUTORES AGROPECUÁRIOS DE UMARIZAL/RN -->
+<section class="bg-blue-light" id="cooperativas">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge" style="background: rgba(22,57,238,0.1); color: var(--blue);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                Cooperativa em Destaque
+            </div>
+            <h2 class="section-title">Cooperativa de Produtores Agropecuários de Umarizal/RN</h2>
+            <p class="section-subtitle">Fortalecendo a agricultura familiar e a agroindústria local</p>
+        </div>
+
+        <div class="two-columns">
+            <div>
+                <div class="quote-card">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p>O Mais Gestão – Projeto GiraSol contribuiu diretamente para a auto-organização da cooperativa, fortalecendo a comercialização por meio da participação em feiras e festivais. A cooperativa acessou políticas públicas como o PAA e o PNAE, integrou a política do Selo Social Biocombustível com matéria-prima do leite, aprovou projeto no Ecoforte, atualizou sua documentação com o CAF e realizou assembleia de organização interna. As atividades de oficinas, assessorias técnicas, formações em gestão, intercâmbios, encontros de mulheres e acompanhamento contínuo foram fundamentais para superar desafios e consolidar conquistas institucionais.</p>
+                </div>
+
+                <div class="info-card">
+                    <p>O projeto fortaleceu a estrutura administrativa, ampliou mercados e consolidou a cooperativa como referência regional na produção e comercialização de produtos agropecuários da agricultura familiar.</p>
+
+                    <div class="tags">
+                        <span class="tag tag-green">Oficinas</span>
+                        <span class="tag tag-green">Assessorias Técnicas</span>
+                        <span class="tag tag-green">Formações em Gestão</span>
+                        <span class="tag tag-green">Acompanhamento Contínuo</span>
+                        <span class="tag tag-blue">Intercâmbios</span>
+                        <span class="tag tag-blue">Encontro de Mulheres</span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="info-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 21h18M5 21V7l8-4 8 4v14M8 21v-9a2 2 0 012-2h4a2 2 0 012 2v9"/>
+                        </svg>
+                        Políticas Públicas Acessadas
+                    </h3>
+                    <div class="policies-grid">
+                        <div class="policy-item">
+                            <strong>PAA</strong>
+                            <p>Programa de Aquisição de Alimentos</p>
+                        </div>
+                        <div class="policy-item">
+                            <strong>PNAE</strong>
+                            <p>Programa Nacional de Alimentação Escolar</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="1" y="3" width="15" height="13"/>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                            <circle cx="5.5" cy="18.5" r="2.5"/>
+                            <circle cx="18.5" cy="18.5" r="2.5"/>
+                        </svg>
+                        Circuitos de Comercialização
+                    </h3>
+                    <ul class="circuit-list">
+                        <li>Festival do Queijo</li>
+                        <li>Feiras estaduais e do Nordeste</li>
+                        <li>Entrega de produtos no mercado local (Umarizal/RN)</li>
+                        <li>Venda de galinha caipira, queijo coalho, manteiga da terra e bebidas regionais</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-quote">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <p>"O Mais Gestão – Projeto GiraSol foi essencial na assessoria e no enfrentamento dos desafios, contribuindo para conquistas importantes e para o fortalecimento institucional da cooperativa."</p>
+            <p class="author">— Representante da Cooperativa de Produtores Agropecuários de Umarizal/RN</p>
+        </div>
+    </div>
+</section>
+
+<!-- COOPABEV -->
+<section class="bg-white">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge" style="background: rgba(245,0,0,0.1); color: var(--red);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                Cooperativa em Destaque
+            </div>
+            <h2 class="section-title">COOPABEV</h2>
+            <p class="section-subtitle">Cooperativa Mista da Agricultura Familiar e Economia Solidária de Bebida Velha</p>
+        </div>
+
+        <div class="two-columns">
+            <div>
+                <div class="quote-card" style="border-left-color: var(--red); background: #fef2f2;">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="color: var(--red);">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p>A COOPABEV participou de oficinas, assessorias técnicas, formações em gestão, formações em boas práticas de manipulação, acompanhamento contínuo, intercâmbios e encontro de mulheres no âmbito do Programa Mais Gestão – Projeto GiraSol. As ações contribuíram significativamente para o fortalecimento organizacional e produtivo da cooperativa.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3 style="color: #111827;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--red);">
+                            <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                            <path d="M17 6h6v6"/>
+                        </svg>
+                        Resultados Alcançados
+                    </h3>
+
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+                            </svg>
+                            <strong>Qualificação produtiva</strong>
+                            <span>Boas práticas e controle sanitário</span>
+                        </div>
+
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                                <path d="M17 6h6v6"/>
+                            </svg>
+                            <strong>Melhoria da gestão</strong>
+                            <span>Processos administrativos fortalecidos</span>
+                        </div>
+
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <circle cx="12" cy="12" r="6"/>
+                                <circle cx="12" cy="12" r="2"/>
+                            </svg>
+                            <strong>Valorização dos produtos</strong>
+                            <span>Novas embalagens e layout</span>
+                        </div>
+
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="8" r="7"/>
+                                <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>
+                            </svg>
+                            <strong>Fortalecimento da comunicação</strong>
+                            <span>Uso estratégico de mídias sociais</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="highlight-box">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18"/>
+                        </svg>
+                        Comercialização e Políticas Públicas
+                    </h3>
+                    <p>A cooperativa realiza comercialização direta ao consumidor por meio da participação em feiras e mantém vendas em pequenos mercados locais, fortalecendo os circuitos curtos de comercialização. Participa de eventos como a Feira da Agricultura Familiar da Bahia, a III FENAPES – Feira Potiguar e a Feira Maranhense da Agricultura Familiar.</p>
+                    <p>Além disso, acessa de forma pontual políticas públicas como o PAA e o PECAFES, ampliando oportunidades institucionais de comercialização, embora ainda necessite de maior acompanhamento técnico para expandir sua inserção em mercados mais estruturados.</p>
+                </div>
+
+                <div class="visual-box">
+                    <div class="visual-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                        </svg>
+                    </div>
+                    <p>O Projeto GiraSol contribuiu para fortalecer a organização interna, qualificar os processos de manipulação e beneficiamento dos pescados e ampliar as oportunidades de comercialização da COOPABEV.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-quote red-quote">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <p>"O Projeto GiraSol permitiu à COOPABEV avançar na qualificação produtiva, na organização da gestão e na valorização dos pescados, fortalecendo sua atuação no mercado e ampliando as oportunidades de geração de renda para os cooperados."</p>
+            <p class="author">— Representante da COOPABEV</p>
+        </div>
+    </div>
+</section>
+
+<!-- COOPAPI - COOPERATIVA POTIGUAR DE APICULTURA E DESENVOLVIMENTO RURAL SUSTENTÁVEL -->
+<section class="bg-yellow-light">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge" style="background: rgba(255,208,0,0.3); color: #111827;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                Organização em Destaque
+            </div>
+            <h2 class="section-title">Coopapi - Cooperativa Potiguar de Apicultura e Desenvolvimento Rural Sustentável</h2>
+            <p class="section-subtitle">Organização participante do Mais Gestão – Projeto GiraSol</p>
+        </div>
+
+        <div class="two-columns">
+            <div>
+                <div class="quote-card" style="border-left-color: var(--yellow);">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="color: var(--yellow);">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p>A Coopapi participou de oficinas, assessorias técnicas, formações em gestão, acompanhamento contínuo, intercâmbios e encontros de mulheres. O Projeto GiraSol contribuiu para a auto-organização da cooperativa, aprimoramento do planejamento e monitoramento das ações, qualificação para chamadas públicas, obtenção e manutenção do Selo Social do Biocombustível, regularização das agroindústrias (unidade de polpa e entreposto), trâmites junto ao Fundo Gaia, formação de novas lideranças e atualização das estruturas jurídicas.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--green);">
+                            <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                            <path d="M17 6h6v6"/>
+                        </svg>
+                        Resultados
+                    </h3>
+
+                    <div class="results-grid">
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Planejamento e monitoramento</strong>
+                            <span>Gestão estratégica das ações</span>
+                        </div>
+
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Regularização agroindustrial</strong>
+                            <span>Unidade de polpa e entreposto</span>
+                        </div>
+
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Fortalecimento jurídico</strong>
+                            <span>Atualização das estruturas legais</span>
+                        </div>
+
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Formação de lideranças</strong>
+                            <span>Renovação e qualificação interna</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="pnae-box">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="8" r="7"/>
+                            <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>
+                        </svg>
+                        Políticas Públicas Acessadas
+                    </h3>
+                    <div class="pnae-highlight">
+                        <strong>PAA</strong>
+                        <span>Programa de Aquisição de Alimentos</span>
+                    </div>
+                    <div class="pnae-highlight" style="margin-top:10px;">
+                        <strong>PNAE</strong>
+                        <span>Programa Nacional de Alimentação Escolar</span>
+                    </div>
+                    <div class="pnae-highlight" style="margin-top:10px;">
+                        <strong>Compra Direta</strong>
+                        <span>Política de comercialização institucional</span>
+                    </div>
+                    <div class="pnae-highlight" style="margin-top:10px;">
+                        <strong>Selo Social do Biocombustível</strong>
+                        <span>Reconhecimento em política energética</span>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--blue);">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                        </svg>
+                        Comercialização
+                    </h3>
+
+                    <ul class="circuit-list visibility-list">
+                        <li>Atuação prioritária em políticas públicas (PAA, PNAE e Compra Direta)</li>
+                        <li>Estratégias de inserção em mercados privados</li>
+                        <li>Participação em feiras</li>
+                        <li>Comercialização em bodega</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-quote green-quote">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <p>"O acompanhamento contínuo do Projeto GiraSol foi fundamental para o fortalecimento institucional, produtivo e comercial da cooperativa, auxiliando nas ações estratégicas e nos processos reflexivos diante dos desafios organizativos."</p>
+            <p class="author">— Representante da Coopapi</p>
+        </div>
+    </div>
+</section>
+
+<!-- ASSOCIAÇÃO PROFESSOR MAURÍCIO DE OLIVEIRA -->
+<section class="bg-blue-light" id="cooperativas">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge" style="background: rgba(22,57,238,0.1); color: var(--blue);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 010 7.75"/>
+                </svg>
+                Organização em Destaque
+            </div>
+            <h2 class="section-title">Associação Professor Maurício de Oliveira</h2>
+            <p class="section-subtitle">Fortalecimento de mulheres rurais e projetos produtivos agroecológicos</p>
+        </div>
+
+        <div class="two-columns">
+            <div>
+                <div class="quote-card">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p>O Mais Gestão – Projeto GiraSol contribuiu para o fortalecimento da autonomia das mulheres, incentivando projetos produtivos de base agroecológica e promovendo trocas de experiências que fortalecem o desenvolvimento social de cada integrante. As ações desenvolvidas aumentaram a resiliência e a capacidade de adaptação às adversidades do ambiente em que vivem. A participação em oficinas, assessorias técnicas, formações em gestão, intercâmbios, encontros de mulheres e acompanhamento contínuo foi fundamental para esse processo.</p>
+                </div>
+
+                <div class="info-card">
+                    <p>O projeto também fortaleceu a auto-organização das mulheres rurais, consolidando os grupos femininos e ampliando sua participação em espaços produtivos e sociais.</p>
+
+                    <div class="tags">
+                        <span class="tag tag-green">Oficinas</span>
+                        <span class="tag tag-green">Assessorias Técnicas</span>
+                        <span class="tag tag-green">Formações em Gestão</span>
+                        <span class="tag tag-green">Acompanhamento Contínuo</span>
+                        <span class="tag tag-blue">Intercâmbios</span>
+                        <span class="tag tag-blue">Encontro de Mulheres</span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="info-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 21h18M5 21V7l8-4 8 4v14M8 21v-9a2 2 0 012-2h4a2 2 0 012 2v9"/>
+                        </svg>
+                        Políticas Públicas Acessadas
+                    </h3>
+                    <div class="policies-grid">
+                        <div class="policy-item">
+                            <strong>Assistência Técnica</strong>
+                            <p>Acompanhamento técnico produtivo</p>
+                        </div>
+                        <div class="policy-item">
+                            <strong>Fomento Rural</strong>
+                            <p>Apoio à produção familiar</p>
+                        </div>
+                        <div class="policy-item">
+                            <strong>P1MC</strong>
+                            <p>Programa Um Milhão de Cisternas</p>
+                        </div>
+                        <div class="policy-item">
+                            <strong>P1+2</strong>
+                            <p>Programa Uma Terra e Duas Águas</p>
+                        </div>
+                        <div class="policy-item">
+                            <strong>Tecnologia Poupadora de Mão de Obra</strong>
+                            <p>Mecanização adaptada à realidade local</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="1" y="3" width="15" height="13"/>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                            <circle cx="5.5" cy="18.5" r="2.5"/>
+                            <circle cx="18.5" cy="18.5" r="2.5"/>
+                        </svg>
+                        Circuitos de Comercialização
+                    </h3>
+                    <ul class="circuit-list">
+                        <li>Feira da Lua</li>
+                        <li>Restaurantes locais</li>
+                        <li>Feira Potiguar da Agricultura Familiar</li>
+                        <li>Mercado privado local</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-quote">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <p>"O projeto ajudou na realização de oficinas e encontros de mulheres, fortalecendo nossa auto-organização e consolidando os grupos de mulheres rurais."</p>
+            <p class="author">— Representante da Associação Professor Maurício de Oliveira</p>
+        </div>
+    </div>
+</section>
+
+<!-- COOAFAP -->
+<section class="bg-white">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge" style="background: rgba(245,0,0,0.1); color: var(--red);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                Cooperativa em Destaque
+            </div>
+            <h2 class="section-title">COOAFAP</h2>
+            <p class="section-subtitle">Cooperativa da Agricultura Familiar de Apodi</p>
+        </div>
+
+        <div class="two-columns">
+            <div>
+                <div class="quote-card" style="border-left-color: var(--red); background: #fef2f2;">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="color: var(--red);">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p>A COOAFAP ingressou recentemente no Projeto Mais Gestão – GiraSol e participou de assessorias técnicas. Mesmo em curto período, as ações já vêm contribuindo para avanços organizativos, produtivos e institucionais da cooperativa.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3 style="color: #111827;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--red);">
+                            <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                            <path d="M17 6h6v6"/>
+                        </svg>
+                        Resultados Alcançados
+                    </h3>
+
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+                            </svg>
+                            <strong>Fortalecimento institucional</strong>
+                            <span>Regularização e titularidade da sede</span>
+                        </div>
+
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                                <path d="M17 6h6v6"/>
+                            </svg>
+                            <strong>Vistoria do SIM</strong>
+                            <span>Beneficiamento de ovos e carnes</span>
+                        </div>
+
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <circle cx="12" cy="12" r="6"/>
+                                <circle cx="12" cy="12" r="2"/>
+                            </svg>
+                            <strong>Realização do CaDSol</strong>
+                            <span>Reconhecimento como empreendimento econômico solidário</span>
+                        </div>
+
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="8" r="7"/>
+                                <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>
+                            </svg>
+                            <strong>Fortalecimento organizativo</strong>
+                            <span>Espaços produtivo e comercial</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="highlight-box">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18"/>
+                        </svg>
+                        Comercialização e Políticas Públicas
+                    </h3>
+                    <p>A cooperativa acessa atualmente o mercado público por meio do PNAE, realizando entregas através de chamadas públicas no município. A vistoria do Serviço de Inspeção Municipal (SIM) permitirá ampliar a inserção em novos mercados.</p>
+                    <p>Participa de circuitos curtos de comercialização por meio de feiras locais e estaduais, fortalecendo a presença da agricultura familiar no território.</p>
+                </div>
+
+                <div class="visual-box">
+                    <div class="visual-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                        </svg>
+                    </div>
+                    <p>O Projeto GiraSol vem contribuindo para o fortalecimento da COOAFAP nos aspectos organizativo, produtivo e comercial, consolidando sua atuação enquanto cooperativa da agricultura familiar.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-quote red-quote">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <p>"Mesmo com pouco tempo de participação, o Projeto GiraSol já vem fortalecendo a organização institucional da COOAFAP, contribuindo para avanços na regularização, no beneficiamento e na ampliação das oportunidades de mercado."</p>
+            <p class="author">— Representante da COOAFAP</p>
+        </div>
+    </div>
+</section>
+
+<!-- ASSOCIAÇÃO DOS AGRICULTORES DO SÍTIO MANSIDÃO -->
+<section class="bg-yellow-light">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge" style="background: rgba(255,208,0,0.3); color: #111827;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                Organização em Destaque
+            </div>
+            <h2 class="section-title">Associação dos Agricultores do Sítio Mansidão</h2>
+            <p class="section-subtitle">Organização participante do Mais Gestão – Projeto GiraSol</p>
+        </div>
+
+        <div class="two-columns">
+            <div>
+                <div class="quote-card" style="border-left-color: var(--yellow);">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="color: var(--yellow);">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p>A associação participou de oficinas, assessorias técnicas, formações em gestão, acompanhamento contínuo, intercâmbios e encontros de mulheres. Como resultados, destacam-se a troca de experiências com outros empreendimentos solidários, o fortalecimento da gestão interna e a melhoria da organização coletiva do grupo.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--green);">
+                            <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                            <path d="M17 6h6v6"/>
+                        </svg>
+                        Resultados
+                    </h3>
+
+                    <div class="results-grid">
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Fortalecimento da gestão</strong>
+                            <span>Estratégias organizativas aprimoradas</span>
+                        </div>
+
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Organização das mulheres</strong>
+                            <span>Maior participação em grupo</span>
+                        </div>
+
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Oficina de precificação</strong>
+                            <span>Valorização e entendimento do preço das polpas</span>
+                        </div>
+
+                        <div class="result-item" style="background: #dcfce7;">
+                            <strong>Troca de experiências</strong>
+                            <span>Interação com empreendimentos solidários</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="pnae-box">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="8" r="7"/>
+                            <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>
+                        </svg>
+                        Políticas Públicas Acessadas
+                    </h3>
+                    <div class="pnae-highlight">
+                        <strong>Caatinga Viva pelas Mãos das Mulheres</strong>
+                    </div>
+                    <div class="pnae-highlight" style="margin-top:10px;">
+                        <strong>Assistência Técnica</strong>
+                    </div>
+                    <div class="pnae-highlight" style="margin-top:10px;">
+                        <strong>Fomento Rural Produtivo</strong>
+                    </div>
+                    <div class="pnae-highlight" style="margin-top:10px;">
+                        <strong>Reuso de Águas Cinzas</strong>
+                    </div>
+                    <div class="pnae-highlight" style="margin-top:10px;">
+                        <strong>P1MC e P1+2</strong>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--blue);">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                        </svg>
+                        Comercialização
+                    </h3>
+
+                    <ul class="circuit-list visibility-list">
+                        <li>Acesso a mercados públicos</li>
+                        <li>Vendas no comércio local</li>
+                        <li>Participação em feiras locais</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-quote green-quote">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <p>"O Projeto GiraSol fortaleceu a organização das mulheres, aprimorou nossa estratégia de gestão e ampliou o entendimento sobre a precificação dos nossos produtos, especialmente as polpas, contribuindo diretamente para o fortalecimento do grupo."</p>
+            <p class="author">— Representante da Associação</p>
+        </div>
+    </div>
+</section>
+
+<!-- GRUPO DE MULHERES DO ASSENTAMENTO PICO ESTREITO/TIRADENTES -->
+<section class="bg-blue-light" id="cooperativas">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge" style="background: rgba(22,57,238,0.1); color: var(--blue);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 010 7.75"/>
+                </svg>
+                Organização em Destaque
+            </div>
+            <h2 class="section-title">Grupo de Mulheres do Assentamento Pico Estreito/Tiradentes</h2>
+            <p class="section-subtitle">Mulheres rurais fortalecendo a agroecologia e a economia solidária</p>
+        </div>
+
+        <div class="two-columns">
+            <div>
+                <div class="quote-card">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p>O Mais Gestão – Projeto GiraSol fortaleceu o processo de auto-organização do grupo por meio de reuniões, intercâmbios e oficinas com temáticas diretamente relacionadas à realidade das mulheres do assentamento. Foram trabalhadas pautas como agroecologia, economia solidária e apicultura, dialogando com as demandas sociais e produtivas do grupo e promovendo maior integração e fortalecimento coletivo.</p>
+                </div>
+
+                <div class="info-card">
+                    <p>O projeto contribuiu significativamente para a autonomia das mulheres, ampliando a capacidade de organização interna e fortalecendo a comercialização dos produtos em feiras, além de promover a troca de experiências entre os grupos participantes.</p>
+
+                    <div class="tags">
+                        <span class="tag tag-green">Oficinas</span>
+                        <span class="tag tag-green">Assessorias Técnicas</span>
+                        <span class="tag tag-green">Formações em Gestão</span>
+                        <span class="tag tag-green">Acompanhamento Contínuo</span>
+                        <span class="tag tag-blue">Intercâmbios</span>
+                        <span class="tag tag-blue">Encontro de Mulheres</span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="info-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="1" y="3" width="15" height="13"/>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                            <circle cx="5.5" cy="18.5" r="2.5"/>
+                            <circle cx="18.5" cy="18.5" r="2.5"/>
+                        </svg>
+                        Circuitos de Comercialização
+                    </h3>
+                    <ul class="circuit-list">
+                        <li>Feira Potiguar da Agricultura Familiar</li>
+                        <li>Feiras em eventos regionais</li>
+                        <li>Acesso ao mercado público</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-quote">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <p>"O Mais Gestão contribuiu com nossa auto-organização e com a comercialização dos produtos nas feiras, proporcionando mais autonomia e fortalecendo a troca de experiências entre as mulheres."</p>
+            <p class="author">— Representante do Grupo de Mulheres do Assentamento Pico Estreito/Tiradentes</p>
+        </div>
+    </div>
+</section>
+
+<!-- ASSOCIAÇÃO TERRA DE ESPERANÇA -->
+<section class="bg-white">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge" style="background: rgba(245,0,0,0.1); color: var(--red);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                Organização em Destaque
+            </div>
+            <h2 class="section-title">Associação dos Produtores e Produtoras do Projeto de Assentamento Terra de Esperança</h2>
+            <p class="section-subtitle">Agricultura familiar e organização de mulheres</p>
+        </div>
+
+        <div class="two-columns">
+            <div>
+                <div class="quote-card" style="border-left-color: var(--red); background: #fef2f2;">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="color: var(--red);">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p>A Associação participou de oficinas, assessorias técnicas, formações em gestão, acompanhamento contínuo, intercâmbios e encontro de mulheres no âmbito do Projeto Mais Gestão – GiraSol. As ações fortaleceram a organização interna e ampliaram os conhecimentos do grupo.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3 style="color: #111827;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--red);">
+                            <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                            <path d="M17 6h6v6"/>
+                        </svg>
+                        Resultados Alcançados
+                    </h3>
+
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+                            </svg>
+                            <strong>Fortalecimento da organização de mulheres</strong>
+                            <span>Reuniões e oficinas formativas</span>
+                        </div>
+
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <circle cx="12" cy="12" r="6"/>
+                                <circle cx="12" cy="12" r="2"/>
+                            </svg>
+                            <strong>Ampliação da autonomia</strong>
+                            <span>Comercialização em feiras locais</span>
+                        </div>
+
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                                <path d="M17 6h6v6"/>
+                            </svg>
+                            <strong>Troca de experiências</strong>
+                            <span>Intercâmbios com outros grupos</span>
+                        </div>
+
+                        <div class="result-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="8" r="7"/>
+                                <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>
+                            </svg>
+                            <strong>Fortalecimento coletivo</strong>
+                            <span>Auto-organização e protagonismo feminino</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="highlight-box">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18"/>
+                        </svg>
+                        Comercialização
+                    </h3>
+                    <p>A organização acessa atualmente o mercado privado, realizando vendas diretas ao consumidor, participando de feiras locais, feiras em eventos e da Feira da Agricultura Familiar, fortalecendo os circuitos curtos de comercialização e ampliando sua autonomia econômica.</p>
+                </div>
+
+                <div class="visual-box">
+                    <div class="visual-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                        </svg>
+                    </div>
+                    <p>O Projeto GiraSol contribuiu significativamente para a auto-organização das mulheres e para a ampliação da troca de experiências com outros grupos produtivos.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-quote red-quote">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <p>"O Projeto GiraSol fortaleceu nossa organização de mulheres, ampliou nossa autonomia por meio da comercialização e proporcionou importantes trocas de experiências com outros grupos."</p>
+            <p class="author">— Representante da Associação Terra de Esperança</p>
+        </div>
+    </div>
+</section>
+
+    <!-- Impacto -->
+    <section class="bg-white" id="impacto">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge" style="background: rgba(22,57,238,0.1); color: var(--blue);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="6"/>
+                        <circle cx="12" cy="12" r="2"/>
+                    </svg>
+                    Impacto do Projeto
+                </div>
+                <h2 class="section-title">Transformações Geradas</h2>
+                <p style="color: var(--blue); font-weight: 600; max-width: 700px; margin: 16px auto 0;">"FORTALECIMENTO DAS COOPERATIVAS, ASSOCIAÇÕES E EMPREENDIMENTOS SOLIDÁRIOS DA AGRICULTURA FAMILIAR DO ESTADO DO RIO GRANDE DO NORTE"</p>
+                <p style="color: #6b7280;">— PROJETO GiraSol</p>
+            </div>
+            <div class="transform-cards">
+                <div class="transform-card">
+                    <div class="transform-icon bg-blue">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                        </svg>
+                    </div>
+                    <h3>Fortalecimento Organizacional</h3>
+                    <p>Aprimoramento da gestão e auto-organização dos grupos cooperativos</p>
+                </div>
+                <div class="transform-card">
+                    <div class="transform-icon bg-green">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                            <path d="M17 6h6v6"/>
+                        </svg>
+                    </div>
+                    <h3>Acesso a Mercados</h3>
+                    <p>Inserção em circuitos curtos e mercados institucionais diversos</p>
+                </div>
+                <div class="transform-card">
+                    <div class="transform-icon bg-yellow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
+                            <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+                        </svg>
+                    </div>
+                    <h3>Qualificação</h3>
+                    <p>Formações, oficinas e assessorias técnicas contínuas para as cooperadas</p>
+                </div>
+                <div class="transform-card">
+                    <div class="transform-icon bg-red">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="8" r="7"/>
+                            <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>
+                        </svg>
+                    </div>
+                    <h3>Políticas Públicas</h3>
+                    <p>Acesso a programas como PAA, PNAE, CONAB e outros instrumentos</p>
+                </div>
+            </div>
+            <div class="methodology-highlight">
+                <div>
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                        Metodologia GiraSol
+                    </h3>
+                    <p>O projeto utiliza uma abordagem integral que combina formação em gestão, assessoria técnica, intercâmbios de experiências e acompanhamento contínuo, promovendo o fortalecimento institucional e a autonomia das organizações da agricultura familiar.</p>
+                    <a href="#contato" class="btn btn-blue">
+                        Saiba como nos contatar
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <strong>20</strong>
+                        <span>Cooperativas e Associações</span>
+                    </div>
+                    <div class="stat-box">
+                        <strong style="color: var(--green);">+100</strong>
+                        <span>Pessoas Atendidas</span>
+                    </div>
+                    <div class="stat-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 32px; height: 32px; margin: 0 auto 8px; color: var(--yellow);">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                        <span>Fortalecimento</span>
+                    </div>
+                    <div class="stat-box">
+                        <strong style="color: var(--red);">RN</strong>
+                        <span>Todo o Estado</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metodologia -->
+    <section class="methodology-section" id="metodologia">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                    </svg>
+                    Como Trabalhamos
+                </div>
+                <h2 class="section-title">Metodologia GiraSol</h2>
+                <p class="section-subtitle">Uma abordagem integral que combina formação, assessoria e acompanhamento contínuo para fortalecer a agricultura familiar no Rio Grande do Norte.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-icon bg-yellow">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                            </svg>
+                        </div>
+                        <span class="step-number">01</span>
+                    </div>
+                    <h3>Formação em Gestão</h3>
+                    <p>Capacitações teóricas e práticas sobre gestão cooperativa, planejamento estratégico e organização produtiva.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-icon bg-red">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+                            </svg>
+                        </div>
+                        <span class="step-number">02</span>
+                    </div>
+                    <h3>Assessoria Técnica</h3>
+                    <p>Acompanhamento especializado para aprimorar processos internos e qualificar a produção.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-icon bg-green">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                            </svg>
+                        </div>
+                        <span class="step-number">03</span>
+                    </div>
+                    <h3>Intercâmbios</h3>
+                    <p>Encontros entre cooperativas para troca de experiências e fortalecimento da rede.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-icon bg-blue">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/>
+                                <path d="M6 1v3M10 1v3M14 1v3"/>
+                            </svg>
+                        </div>
+                        <span class="step-number">04</span>
+                    </div>
+                    <h3>Acompanhamento Contínuo</h3>
+                    <p>Suporte permanente para garantir a sustentabilidade e o crescimento das organizações.</p>
+                </div>
+            </div>
+            <div class="methodology-footer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/>
+                    <path d="M6 1v3M10 1v3M14 1v3"/>
+                </svg>
+                <p>"Promovendo o fortalecimento institucional e a autonomia das organizações da agricultura familiar"</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section class="contact-section" id="contato">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge" style="background: rgba(22,57,238,0.1); color: var(--blue);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    Entre em Contato
+                </div>
+                <h2 class="section-title">Fale com o Projeto GiraSol</h2>
+                <p class="section-subtitle">O projeto GiraSol - Mais Gestão/MDA continua fortalecendo organizações da agricultura familiar em todo o Rio Grande do Norte. Entre em contato para saber mais sobre como participar.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <h3>Informações de Contato</h3>
+                        <div class="contact-item">
+                            <div class="contact-icon yellow">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <strong>Localização</strong>
+                                <span>Mossoró, Natal - RN</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon blue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <strong>Email</strong>
+                                <span>ifsol.mossoro@gmail.com</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon red">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                    <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <strong>Instagram</strong>
+                                <a href="https://instagram.com/ifsol.mo" target="_blank">@ifsol.mo</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <h3>Projeto</h3>
+                        <p>"FORTALECIMENTO DAS COOPERATIVAS, ASSOCIAÇÕES E EMPREENDIMENTOS SOLIDÁRIOS DA AGRICULTURA FAMILIAR DO ESTADO DO RIO GRANDE DO NORTE" — "PROJETO GiraSol"</p>
+                    </div>
+                </div>
+                <div class="form-card">
+                    <h3>Envie uma Mensagem</h3>
+                    <form onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                                Nome
+                            </label>
+                            <input type="text" id="nome" placeholder="Seu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
+                                Email
+                            </label>
+                            <input type="email" id="email" placeholder="seu@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                                </svg>
+                                Mensagem
+                            </label>
+                            <textarea id="mensagem" placeholder="Como podemos ajudar?" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"/>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                            </svg>
+                            Enviar Mensagem
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand">
+                    <div class="logo-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"/>
+                            <path stroke-linecap="round" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>GiraSol</h3>
+                        <p>Projeto GiraSol - Mais Gestão/MDA</p>
+                    </div>
+                </div>
+                <p class="footer-about">Fortalecendo a Agricultura Familiar no Rio Grande do Norte através de formação, assessoria técnica e acompanhamento contínuo.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#cooperativas">Cooperativas</a></li>
+                    <li><a href="#impacto">Impacto</a></li>
+                    <li><a href="#metodologia">Metodologia</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contato</h4>
+                <div class="footer-contact-item yellow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    Mossoró, Natal - RN
+                </div>
+                <div class="footer-contact-item blue">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    ifsol.mossoro@gmail.com
+                </div>
+                <div class="footer-contact-item red">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                    <a href="https://instagram.com/ifsol.mo" target="_blank">@ifsol.mo</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Projeto GiraSol. Todos os direitos reservados.</p>
+            <p>Feito com <span class="heart">♥</span> para a agricultura familiar do RN</p>
+        </div>
+    </footer>
+
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault();
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const mensagem = document.getElementById('mensagem').value;
+            
+            const subject = encodeURIComponent('Contato do site - ' + nome);
+            const body = encodeURIComponent('Nome: ' + nome + '\nEmail: ' + email + '\n\nMensagem:\n' + mensagem);
+            const mailtoLink = 'mailto:ifsol.mossoro@gmail.com?subject=' + subject + '&body=' + body;
+            
+            window.open(mailtoLink, '_blank');
+            alert('Mensagem preparada! Abra seu cliente de email para enviar.');
+            
+            document.getElementById('nome').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('mensagem').value = '';
+        }
+    </script>
+</body>
+</html>
